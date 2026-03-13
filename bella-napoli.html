@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bella Napoli — Pizzaria Artesanal</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%23C0392B'/><text y='.9em' font-size='72' x='50%' dominant-baseline='auto' text-anchor='middle' dy='0.1em'>🍕</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --rosso: #C0392B;
+  --rosso-scuro: #922B21;
+  --rosso-vivo: #E74C3C;
+  --crema: #F5ECD7;
+  --crema-scuro: #E8D5B0;
+  --avorio: #FAF6EE;
+  --marrone: #6B4226;
+  --nero: #1A0F0A;
+  --oro: #C9A84C;
+  --verde: #2D5A27;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { background: var(--avorio); color: var(--nero); font-family: 'DM Sans', sans-serif; overflow-x: hidden; }
+body::before {
+  content: ''; position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 9999; opacity: 0.4;
+}
+
+/* NAV */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1.2rem 4rem; display: flex; align-items: center; justify-content: space-between; transition: all 0.4s ease; }
+nav.scrolled { background: rgba(26,15,10,0.96); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(201,168,76,0.2); }
+.nav-logo { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 900; color: var(--crema); letter-spacing: 0.02em; text-decoration: none; }
+.nav-logo span { color: var(--oro); font-style: italic; }
+.nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+.nav-links a { font-size: 0.8rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(245,236,215,0.75); text-decoration: none; transition: color 0.3s; }
+.nav-links a:hover { color: var(--oro); }
+.nav-cta { background: var(--rosso) !important; color: white !important; padding: 0.6rem 1.4rem !important; border-radius: 2px; }
+
+/* HERO */
+.hero { min-height: 100vh; position: relative; display: flex; align-items: center; overflow: hidden; background: var(--nero); }
+.hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 60% 50%, rgba(192,57,43,0.15) 0%, transparent 70%), radial-gradient(ellipse 40% 40% at 20% 80%, rgba(201,168,76,0.08) 0%, transparent 60%); }
+.hero-texture { position: absolute; inset: 0; background-image: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(245,236,215,0.015) 2px, rgba(245,236,215,0.015) 4px); }
+.pizza-decoration {
+  position: absolute; right: -5%; top: 50%; transform: translateY(-50%);
+  width: 55vw; max-width: 750px; aspect-ratio: 1; border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, #D4873A 0%, #C0692B 30%, #8B3E1C 65%, #5C2410 100%);
+  box-shadow: 0 0 120px rgba(192,57,43,0.3), inset 0 0 80px rgba(0,0,0,0.4);
+  overflow: hidden; animation: pizzaSpin 60s linear infinite;
+}
+@keyframes pizzaSpin { from { transform: translateY(-50%) rotate(0deg); } to { transform: translateY(-50%) rotate(360deg); } }
+.pizza-decoration::before { content: ''; position: absolute; inset: 8%; border-radius: 50%; background: radial-gradient(circle at 45% 40%, #E8A050 0%, #CC7530 25%, #A85520 55%, #7A3510 100%); }
+.pizza-decoration::after { content: ''; position: absolute; inset: 15%; border-radius: 50%; background: radial-gradient(circle at 30% 25%, #E83028 0%, #CC2420 15%, transparent 30%), radial-gradient(circle at 65% 40%, #E83028 0%, #CC2420 12%, transparent 25%), radial-gradient(circle at 55% 30%, #4A7A3A 0%, #3A6A2A 12%, transparent 25%), radial-gradient(circle at 35% 45%, #4A7A3A 0%, #3A6A2A 10%, transparent 20%), radial-gradient(circle at 50% 50%, #D4873A 0%, #C0692B 40%, #8B3E1C 100%); }
+.pizza-mozzarella { position: absolute; inset: 18%; border-radius: 50%; overflow: hidden; }
+.mozzarella-spot { position: absolute; border-radius: 50%; background: radial-gradient(circle at 40% 35%, #FFFEF0, #F5E8C0); opacity: 0.85; }
+.hero-content { position: relative; z-index: 2; padding: 0 4rem; max-width: 580px; animation: heroFadeIn 1.2s ease both; }
+@keyframes heroFadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+.hero-eyebrow { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: var(--oro); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem; }
+.hero-eyebrow::before { content: ''; width: 40px; height: 1px; background: var(--oro); display: block; }
+.hero-title { font-family: 'Playfair Display', serif; font-size: clamp(3.5rem, 6vw, 6rem); font-weight: 900; line-height: 0.95; color: var(--crema); }
+.hero-title em { font-style: italic; color: var(--rosso-vivo); display: block; }
+.hero-subtitle { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-style: italic; color: var(--crema-scuro); margin: 1.5rem 0 2.5rem; line-height: 1.5; opacity: 0.85; }
+.hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+.hero-stats { position: absolute; bottom: 3rem; left: 4rem; display: flex; gap: 3rem; animation: heroFadeIn 1.2s ease 0.4s both; }
+.stat-number { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; color: var(--oro); line-height: 1; }
+.stat-label { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(245,236,215,0.55); margin-top: 0.3rem; }
+
+/* BUTTONS */
+.btn-primary { background: var(--rosso); color: white; padding: 1rem 2.2rem; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; border: none; cursor: pointer; text-decoration: none; display: inline-block; transition: all 0.3s ease; }
+.btn-primary:hover { background: var(--rosso-vivo); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(192,57,43,0.4); }
+.btn-outline { background: transparent; color: var(--crema); padding: 1rem 2.2rem; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; border: 1px solid rgba(245,236,215,0.3); cursor: pointer; text-decoration: none; display: inline-block; transition: all 0.3s ease; }
+.btn-outline:hover { border-color: var(--oro); color: var(--oro); }
+
+/* SHARED */
+.section-label { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: var(--rosso); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem; }
+.section-label::before { content: ''; width: 30px; height: 1px; background: var(--rosso); display: block; }
+.section-title { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 4vw, 3.5rem); font-weight: 700; line-height: 1.1; color: var(--nero); margin-bottom: 2rem; }
+.section-title em { font-style: italic; color: var(--rosso); }
+.section-text { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; line-height: 1.8; color: #4A3525; margin-bottom: 1.5rem; }
+
+/* SOBRE */
+.section-sobre { padding: 8rem 4rem; background: var(--crema); position: relative; overflow: hidden; }
+.section-sobre::before { content: 'NAPOLI'; position: absolute; right: -2rem; top: 50%; transform: translateY(-50%) rotate(90deg); font-family: 'Playfair Display', serif; font-size: 12rem; font-weight: 900; color: rgba(107,66,38,0.06); pointer-events: none; white-space: nowrap; }
+.sobre-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; max-width: 1200px; margin: 0 auto; align-items: center; }
+.sobre-image { position: relative; }
+.sobre-image-main { width: 100%; aspect-ratio: 4/5; background: var(--nero); border-radius: 2px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(201,168,76,0.15); }
+.sobre-image-main::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 30% 40%, rgba(107,66,38,0.4) 0%, transparent 65%), radial-gradient(ellipse 60% 80% at 70% 70%, rgba(192,57,43,0.15) 0%, transparent 60%), repeating-linear-gradient(-55deg, transparent, transparent 8px, rgba(201,168,76,0.02) 8px, rgba(201,168,76,0.02) 9px); }
+.sobre-image-main::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 60%, rgba(26,15,10,0.5) 100%); }
+.sobre-typo { position: relative; z-index: 2; text-align: center; padding: 2rem; user-select: none; }
+.sobre-typo-since { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.45em; text-transform: uppercase; color: var(--oro); display: block; margin-bottom: 1.2rem; opacity: 0.8; }
+.sobre-typo-main { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 5vw, 5rem); font-weight: 900; font-style: italic; line-height: 0.9; color: var(--crema); display: block; }
+.sobre-typo-divider { width: 50px; height: 1px; background: var(--rosso); margin: 1.4rem auto; display: block; }
+.sobre-typo-sub { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 300; letter-spacing: 0.35em; text-transform: uppercase; color: rgba(245,236,215,0.4); display: block; }
+.sobre-typo-tag { font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(201,168,76,0.55); display: block; margin-top: 0.8rem; }
+.sobre-badge { position: absolute; bottom: -2rem; left: -2rem; width: 130px; height: 130px; background: var(--rosso); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; color: white; border: 4px solid var(--crema); }
+.sobre-badge-num { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; line-height: 1; }
+.sobre-badge-text { font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; text-align: center; line-height: 1.3; margin-top: 0.2rem; opacity: 0.9; }
+
+/* CARDAPIO */
+.section-cardapio { padding: 8rem 4rem; background: var(--nero); position: relative; overflow: hidden; }
+.section-cardapio::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--oro), transparent); }
+.section-cardapio::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--oro), transparent); }
+.cardapio-header { text-align: center; margin-bottom: 5rem; }
+.cardapio-header .section-label { justify-content: center; }
+.cardapio-header .section-label::before { display: none; }
+.cardapio-header .section-title { color: var(--crema); font-size: clamp(2.5rem, 5vw, 4rem); }
+.cardapio-tabs { display: flex; justify-content: center; margin-bottom: 4rem; border-bottom: 1px solid rgba(245,236,215,0.1); }
+.tab-btn { padding: 0.8rem 2rem; background: none; border: none; border-bottom: 2px solid transparent; margin-bottom: -1px; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(245,236,215,0.45); cursor: pointer; transition: all 0.3s; }
+.tab-btn.active, .tab-btn:hover { color: var(--oro); border-bottom-color: var(--oro); }
+.cardapio-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5px; max-width: 1200px; margin: 0 auto; }
+.pizza-card { background: rgba(245,236,215,0.03); border: 1px solid rgba(245,236,215,0.07); padding: 2.5rem; transition: all 0.4s ease; cursor: pointer; }
+.pizza-card:hover { background: rgba(245,236,215,0.06); border-color: rgba(201,168,76,0.2); transform: translateY(-3px); }
+.pizza-num { font-family: 'Playfair Display', serif; font-size: 0.85rem; color: var(--rosso); margin-bottom: 1rem; opacity: 0.7; }
+.pizza-name { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--crema); margin-bottom: 0.5rem; line-height: 1.2; }
+.pizza-desc { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-style: italic; color: rgba(245,236,215,0.5); margin-bottom: 1.5rem; line-height: 1.5; }
+.pizza-footer { display: flex; align-items: center; justify-content: space-between; }
+.pizza-price { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: var(--oro); }
+.pizza-tag { font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.3rem 0.8rem; border: 1px solid currentColor; border-radius: 20px; color: var(--verde); background: rgba(45,90,39,0.1); }
+.pizza-tag.classica { color: var(--oro); background: rgba(201,168,76,0.08); }
+.pizza-tag.especial { color: var(--rosso-vivo); background: rgba(231,76,60,0.08); }
+
+/* RESERVA */
+.section-reserva { padding: 8rem 4rem; background: var(--crema); }
+.reserva-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
+.reserva-features { list-style: none; margin-bottom: 3rem; }
+.reserva-features li { padding: 1rem 0; border-bottom: 1px solid rgba(107,66,38,0.12); font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; color: #4A3525; display: flex; align-items: center; gap: 1rem; }
+.reserva-features li::before { content: '◆'; color: var(--rosso); font-size: 0.5rem; flex-shrink: 0; }
+.form-card { background: var(--nero); padding: 3rem; position: relative; }
+.form-card::before { content: ''; position: absolute; top: 0; left: 0; width: 60px; height: 3px; background: var(--rosso); }
+.form-title { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; color: var(--crema); margin-bottom: 0.5rem; }
+.form-subtitle { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-style: italic; color: rgba(245,236,215,0.45); margin-bottom: 2.5rem; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+.form-group { margin-bottom: 1rem; }
+.form-group label { display: block; font-size: 0.68rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(245,236,215,0.4); margin-bottom: 0.5rem; }
+.form-group input, .form-group select, .form-group textarea { width: 100%; padding: 0.85rem 1rem; background: rgba(245,236,215,0.05); border: 1px solid rgba(245,236,215,0.1); color: var(--crema); font-family: 'DM Sans', sans-serif; font-size: 0.9rem; outline: none; transition: border-color 0.3s; -webkit-appearance: none; }
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--rosso); }
+.form-group select option { background: var(--nero); }
+.form-group textarea { resize: vertical; min-height: 80px; }
+.form-submit { width: 100%; margin-top: 1.5rem; }
+
+/* DELIVERY */
+.section-delivery { padding: 6rem 4rem; background: var(--rosso-scuro); position: relative; overflow: hidden; text-align: center; }
+.delivery-bg { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, rgba(231,76,60,0.3) 0%, transparent 70%); }
+.delivery-content { position: relative; max-width: 700px; margin: 0 auto; }
+.delivery-content .section-label { justify-content: center; color: rgba(245,236,215,0.6); }
+.delivery-content .section-label::before { display: none; }
+.delivery-title { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 900; color: var(--crema); line-height: 1; margin-bottom: 1.5rem; }
+.delivery-title em { font-style: italic; color: var(--oro); }
+.delivery-desc { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-style: italic; color: rgba(245,236,215,0.7); margin-bottom: 3rem; line-height: 1.6; }
+.delivery-apps { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 3rem; }
+.app-btn { display: flex; align-items: center; gap: 0.8rem; padding: 0.9rem 1.8rem; background: rgba(245,236,215,0.1); border: 1px solid rgba(245,236,215,0.2); color: var(--crema); font-size: 0.85rem; font-weight: 500; transition: all 0.3s; cursor: pointer; border-radius: 2px; }
+.app-btn:hover { background: rgba(245,236,215,0.18); border-color: var(--oro); color: var(--oro); }
+.delivery-tempo { display: flex; gap: 3rem; justify-content: center; }
+.tempo-item { text-align: center; }
+.tempo-num { font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 900; color: var(--oro); line-height: 1; }
+.tempo-label { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(245,236,215,0.55); margin-top: 0.4rem; }
+
+/* DEPOIMENTOS */
+.section-depoimentos { padding: 8rem 4rem; background: var(--avorio); }
+.depoimentos-header { text-align: center; margin-bottom: 5rem; }
+.depoimentos-header .section-label { justify-content: center; }
+.depoimentos-header .section-label::before { display: none; }
+.depoimentos-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; max-width: 1200px; margin: 0 auto; }
+.depoimento-card { background: white; padding: 2.5rem; box-shadow: 0 2px 40px rgba(107,66,38,0.06); border-bottom: 3px solid transparent; transition: all 0.4s; }
+.depoimento-card:hover { border-bottom-color: var(--rosso); transform: translateY(-4px); box-shadow: 0 12px 50px rgba(107,66,38,0.12); }
+.depoimento-quote { font-size: 3rem; color: var(--rosso); font-family: 'Playfair Display', serif; line-height: 0.5; margin-bottom: 1.5rem; opacity: 0.6; }
+.depoimento-text { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-style: italic; color: #4A3525; line-height: 1.7; margin-bottom: 2rem; }
+.depoimento-author { display: flex; align-items: center; gap: 1rem; }
+.author-avatar { width: 42px; height: 42px; border-radius: 50%; background: var(--crema-scuro); display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-weight: 700; color: var(--marrone); font-size: 0.9rem; flex-shrink: 0; }
+.author-name { font-size: 0.85rem; font-weight: 500; color: var(--nero); }
+.author-stars { color: var(--oro); font-size: 0.75rem; margin-top: 0.1rem; }
+
+/* LOCALIZACAO */
+.section-localizacao { background: var(--nero); padding: 8rem 4rem; }
+.localizacao-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
+.horarios { margin: 2.5rem 0; border-top: 1px solid rgba(245,236,215,0.08); }
+.horario-row { display: flex; justify-content: space-between; align-items: center; padding: 0.9rem 0; border-bottom: 1px solid rgba(245,236,215,0.08); }
+.horario-dia { font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(245,236,215,0.5); }
+.horario-tempo { font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 400; color: var(--crema); }
+.horario-tempo.fechado { color: rgba(245,236,215,0.25); }
+.localizacao-contato { display: flex; flex-direction: column; gap: 0.8rem; margin-top: 2rem; }
+.contato-item { display: flex; align-items: center; gap: 1rem; font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; color: rgba(245,236,215,0.65); }
+.contato-icon { width: 36px; height: 36px; border: 1px solid rgba(245,236,215,0.1); display: flex; align-items: center; justify-content: center; font-size: 0.9rem; flex-shrink: 0; }
+.mapa-placeholder { aspect-ratio: 4/3; background: linear-gradient(135deg, #1A0F0A 0%, #2A1810 100%); border: 1px solid rgba(201,168,76,0.15); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+.mapa-placeholder::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(201,168,76,0.03) 40px, rgba(201,168,76,0.03) 41px), repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(201,168,76,0.03) 40px, rgba(201,168,76,0.03) 41px); }
+.mapa-marker { position: absolute; text-align: center; z-index: 2; }
+.mapa-pin { width: 20px; height: 20px; background: var(--rosso); border-radius: 50% 50% 50% 0; transform: rotate(-45deg); margin: 0 auto 0.5rem; animation: pinBounce 2s ease-in-out infinite; box-shadow: 0 0 20px rgba(192,57,43,0.5); }
+@keyframes pinBounce { 0%, 100% { transform: rotate(-45deg) translateY(0); } 50% { transform: rotate(-45deg) translateY(-8px); } }
+.mapa-label { font-family: 'Playfair Display', serif; font-size: 0.9rem; font-weight: 700; color: var(--crema); background: rgba(26,15,10,0.9); padding: 0.4rem 1rem; border: 1px solid rgba(201,168,76,0.2); white-space: nowrap; }
+.mapa-rua-h { position: absolute; left: 0; right: 0; height: 12px; background: rgba(201,168,76,0.06); }
+.mapa-rua-v { position: absolute; top: 0; bottom: 0; width: 12px; background: rgba(201,168,76,0.06); }
+
+/* FOOTER */
+footer { background: #0F0806; padding: 5rem 4rem 2rem; border-top: 1px solid rgba(201,168,76,0.1); }
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 4rem; max-width: 1200px; margin: 0 auto 4rem; }
+.footer-brand .nav-logo { font-size: 1.8rem; display: block; margin-bottom: 1rem; }
+.footer-tagline { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-style: italic; color: rgba(245,236,215,0.4); line-height: 1.6; margin-bottom: 2rem; max-width: 250px; }
+.footer-social { display: flex; gap: 0.8rem; }
+.social-btn { width: 38px; height: 38px; border: 1px solid rgba(245,236,215,0.1); display: flex; align-items: center; justify-content: center; color: rgba(245,236,215,0.4); font-size: 0.9rem; text-decoration: none; transition: all 0.3s; cursor: pointer; }
+.social-btn:hover { border-color: var(--rosso); color: var(--rosso); }
+.footer-col h4 { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; color: var(--oro); margin-bottom: 1.5rem; }
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
+.footer-links a { font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: rgba(245,236,215,0.45); text-decoration: none; transition: color 0.3s; }
+.footer-links a:hover { color: var(--crema); }
+.footer-bottom { border-top: 1px solid rgba(245,236,215,0.05); padding-top: 2rem; display: flex; align-items: center; justify-content: space-between; max-width: 1200px; margin: 0 auto; }
+.footer-copy { font-size: 0.75rem; color: rgba(245,236,215,0.2); }
+.footer-copy span { color: var(--rosso); }
+
+/* NOTIFICATION */
+.notification { position: fixed; bottom: 2rem; right: 2rem; background: var(--verde); color: white; padding: 1rem 1.5rem; font-size: 0.85rem; z-index: 200; transform: translateY(100px); opacity: 0; transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1); border-left: 3px solid var(--oro); max-width: 320px; }
+.notification.show { transform: translateY(0); opacity: 1; }
+
+/* REVEAL */
+.reveal { opacity: 0; transform: translateY(25px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* MODAL PEDIDO */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 500;
+  background: rgba(10,5,2,0.85); backdrop-filter: blur(6px);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+  padding: 1rem;
+}
+.modal-overlay.open { opacity: 1; pointer-events: all; }
+.modal-box {
+  background: var(--nero); border: 1px solid rgba(201,168,76,0.2);
+  width: 100%; max-width: 560px; max-height: 90vh; overflow-y: auto;
+  position: relative;
+  transform: translateY(20px); transition: transform 0.3s ease, max-width 0.3s ease;
+}
+.modal-box.meia-mode { max-width: 780px; }
+.modal-overlay.open .modal-box { transform: translateY(0); }
+.modal-box::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--rosso), var(--oro)); }
+.modal-header { padding: 2rem 2rem 1rem; display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; }
+.modal-pizza-name { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; color: var(--crema); line-height: 1.1; }
+.modal-pizza-desc { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-style: italic; color: rgba(245,236,215,0.5); margin-top: 0.4rem; }
+.modal-close { background: none; border: 1px solid rgba(245,236,215,0.15); color: rgba(245,236,215,0.5); width: 36px; height: 36px; flex-shrink: 0; cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+.modal-close:hover { border-color: var(--rosso); color: var(--rosso); }
+.modal-body { padding: 0 2rem 2rem; }
+.modal-section-title { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: var(--oro); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid rgba(245,236,215,0.07); }
+.modal-options { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; margin-bottom: 1.5rem; }
+.modal-opt {
+  padding: 0.9rem 1rem; border: 1px solid rgba(245,236,215,0.1);
+  background: rgba(245,236,215,0.03); cursor: pointer; transition: all 0.2s;
+  text-align: left;
+}
+.modal-opt:hover { border-color: rgba(201,168,76,0.3); background: rgba(245,236,215,0.05); }
+.modal-opt.selected { border-color: var(--rosso); background: rgba(192,57,43,0.1); }
+.modal-opt-label { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 600; color: var(--crema); display: block; }
+.modal-opt-sub { font-size: 0.72rem; color: rgba(245,236,215,0.4); margin-top: 0.2rem; display: block; }
+.modal-opt.selected .modal-opt-label { color: var(--oro); }
+/* meia-a-meia cards */
+.modal-meia-select { display: none; margin-bottom: 1.5rem; }
+.modal-meia-select.visible { display: block; }
+.meia-cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
+.meia-card {
+  background: rgba(245,236,215,0.03); border: 1px solid rgba(245,236,215,0.08);
+  padding: 1rem; cursor: pointer; transition: all 0.2s; text-align: left;
+}
+.meia-card:hover { border-color: rgba(201,168,76,0.3); background: rgba(245,236,215,0.06); }
+.meia-card.selected { border-color: var(--rosso); background: rgba(192,57,43,0.12); }
+.meia-card.disabled { opacity: 0.3; cursor: not-allowed; pointer-events: none; }
+.meia-card-num { font-family: 'Playfair Display', serif; font-size: 0.7rem; color: var(--rosso); opacity: 0.7; margin-bottom: 0.3rem; }
+.meia-card-name { font-family: 'Playfair Display', serif; font-size: 0.95rem; font-weight: 700; color: var(--crema); line-height: 1.2; margin-bottom: 0.3rem; }
+.meia-card.selected .meia-card-name { color: var(--oro); }
+.meia-card-desc { font-family: 'Cormorant Garamond', serif; font-size: 0.8rem; font-style: italic; color: rgba(245,236,215,0.4); line-height: 1.3; margin-bottom: 0.6rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.meia-card-price { font-family: 'Playfair Display', serif; font-size: 0.9rem; font-weight: 700; color: var(--oro); }
+.modal-price-row { display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 0; border-top: 1px solid rgba(245,236,215,0.07); margin-bottom: 1rem; }
+.modal-total-label { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(245,236,215,0.4); }
+.modal-total-price { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; color: var(--oro); }
+.modal-btn-confirmar { width: 100%; padding: 1.1rem; background: var(--rosso); color: white; border: none; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; transition: all 0.3s; }
+.modal-btn-confirmar:hover { background: var(--rosso-vivo); }
+.modal-btn-confirmar:disabled { background: rgba(245,236,215,0.1); color: rgba(245,236,215,0.3); cursor: not-allowed; }
+/* Entrega e pagamento */
+.modal-input-group { margin-bottom: 1rem; }
+.modal-input-group label { display: block; font-size: 0.68rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(245,236,215,0.4); margin-bottom: 0.5rem; }
+.modal-input-group input, .modal-input-group textarea, .modal-input-group select { width: 100%; padding: 0.85rem 1rem; background: rgba(245,236,215,0.05); border: 1px solid rgba(245,236,215,0.1); color: var(--crema); font-family: 'DM Sans', sans-serif; font-size: 0.9rem; outline: none; transition: border-color 0.3s; -webkit-appearance: none; }
+.modal-input-group input:focus, .modal-input-group textarea:focus, .modal-input-group select:focus { border-color: var(--rosso); }
+.modal-input-group textarea { resize: none; height: 70px; }
+.modal-input-group select option { background: var(--nero); }
+.modal-input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+.pgto-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; margin-bottom: 1rem; }
+.pgto-opt { padding: 0.9rem 0.6rem; border: 1px solid rgba(245,236,215,0.1); background: rgba(245,236,215,0.03); cursor: pointer; transition: all 0.2s; text-align: center; }
+.pgto-opt:hover { border-color: rgba(201,168,76,0.3); background: rgba(245,236,215,0.05); }
+.pgto-opt.selected { border-color: var(--rosso); background: rgba(192,57,43,0.1); }
+.pgto-icon { font-size: 1.3rem; display: block; margin-bottom: 0.3rem; }
+.pgto-label { font-family: 'DM Sans', sans-serif; font-size: 0.72rem; font-weight: 500; color: rgba(245,236,215,0.6); display: block; }
+.pgto-opt.selected .pgto-label { color: var(--oro); }
+.troco-field { display: none; margin-bottom: 1rem; }
+.troco-field.visible { display: block; }
+
+/* MOBILE */
+@media (max-width: 900px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-links { display: none; }
+  .hero-content { padding: 0 1.5rem; }
+  .hero-stats { left: 1.5rem; bottom: 2rem; gap: 2rem; }
+  .pizza-decoration { right: -20%; width: 70vw; opacity: 0.3; }
+  .section-sobre, .section-reserva, .section-cardapio, .section-delivery, .section-depoimentos, .section-localizacao { padding: 5rem 1.5rem; }
+  .sobre-grid, .reserva-inner, .localizacao-inner { grid-template-columns: 1fr; gap: 3rem; }
+  .cardapio-grid, .depoimentos-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .form-row { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <a href="#" class="nav-logo">Bella <span>Napoli</span></a>
+  <ul class="nav-links">
+    <li><a href="#sobre">Nossa Historia</a></li>
+    <li><a href="#cardapio">Cardapio</a></li>
+    <li><a href="#reserva">Reservas</a></li>
+    <li><a href="#delivery">Delivery</a></li>
+    <li><a href="#localizacao">Localizacao</a></li>
+    <li><a href="#reserva" class="nav-cta">Fazer Reserva</a></li>
+  </ul>
+</nav>
+
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-texture"></div>
+  <div class="pizza-decoration">
+    <div class="pizza-mozzarella">
+      <div class="mozzarella-spot" style="width:18%;height:18%;top:15%;left:20%;"></div>
+      <div class="mozzarella-spot" style="width:14%;height:14%;top:35%;left:60%;"></div>
+      <div class="mozzarella-spot" style="width:16%;height:16%;top:60%;left:30%;"></div>
+      <div class="mozzarella-spot" style="width:12%;height:12%;top:55%;left:65%;"></div>
+      <div class="mozzarella-spot" style="width:10%;height:10%;top:25%;left:45%;"></div>
+    </div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Desde 1987 &mdash; Vila Madalena</div>
+    <h1 class="hero-title">
+      Autentica
+      <em>Napolitana</em>
+    </h1>
+    <p class="hero-subtitle">Massas fermentadas por 72 horas, forno a lenha a 450&deg;C e ingredientes importados diretamente de Napoles.</p>
+    <div class="hero-actions">
+      <a href="#cardapio" class="btn-primary">Ver Cardapio</a>
+      <a href="#delivery" class="btn-outline">Pedir Agora</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-number">37+</div>
+      <div class="stat-label">Anos de tradicao</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">4.9</div>
+      <div class="stat-label">Avaliacao media</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">28</div>
+      <div class="stat-label">Sabores no cardapio</div>
+    </div>
+  </div>
+</section>
+
+<section class="section-sobre" id="sobre">
+  <div class="sobre-grid">
+    <div class="sobre-image reveal">
+      <div class="sobre-image-main">
+        <div class="sobre-typo">
+          <span class="sobre-typo-since">Desde 1987</span>
+          <span class="sobre-typo-main">Bella<br>Napoli</span>
+          <span class="sobre-typo-divider"></span>
+          <span class="sobre-typo-sub">Pizzaria Artesanal</span>
+          <span class="sobre-typo-tag">Vila Madalena &middot; Sao Paulo</span>
+        </div>
+      </div>
+      <div class="sobre-badge">
+        <div class="sobre-badge-num">1987</div>
+        <div class="sobre-badge-text">Fundada em<br>Napoles</div>
+      </div>
+    </div>
+    <div class="reveal" style="transition-delay:0.15s">
+      <div class="section-label">Nossa Historia</div>
+      <h2 class="section-title">Uma receita<br>que cruzou <em>o oceano</em></h2>
+      <p class="section-text">Don Giuseppe Esposito trouxe de Napoles nao apenas a receita, mas a alma da pizza verdadeira. Cada pizza e feita com massa de fermentacao lenta de 72 horas, molho San Marzano DOP e mozzarella de bufala da Campania.</p>
+      <p class="section-text">Nosso forno a lenha opera a 450C, garantindo a crocancia da borda e a leveza do miolo que so a tecnica napolitana proporciona. Uma tradicao preservada ha tres geracoes, agora no coracao de Sao Paulo.</p>
+      <a href="#cardapio" class="btn-primary" style="margin-top:1rem">Explorar Cardapio</a>
+    </div>
+  </div>
+</section>
+
+<section class="section-cardapio" id="cardapio">
+  <div class="cardapio-header reveal">
+    <div class="section-label">Il Menu</div>
+    <h2 class="section-title" style="color:var(--crema)">Nossas <em style="color:var(--rosso-vivo)">Pizzas</em></h2>
+  </div>
+  <div class="cardapio-tabs">
+    <button class="tab-btn active" onclick="changeTab(this,'classicas')">Classicas</button>
+    <button class="tab-btn" onclick="changeTab(this,'especiais')">Especiais da Casa</button>
+    <button class="tab-btn" onclick="changeTab(this,'doces')">Doces</button>
+    <button class="tab-btn" onclick="changeTab(this,'bebidas')">Bebidas</button>
+  </div>
+  <div class="cardapio-grid" id="cardapio-content"></div>
+</section>
+
+<section class="section-reserva" id="reserva">
+  <div class="reserva-inner">
+    <div class="reveal">
+      <div class="section-label">Reservas</div>
+      <h2 class="section-title">Reserve sua <em>mesa</em><br>com antecedencia</h2>
+      <ul class="reserva-features">
+        <li>Ambiente climatizado com 18 mesas intimas</li>
+        <li>Espaco privativo para grupos ate 30 pessoas</li>
+        <li>Cardapio especial para eventos e comemoracoes</li>
+        <li>Sommelier disponivel para harmonizacao de vinhos</li>
+        <li>Confirmacao imediata por WhatsApp</li>
+      </ul>
+      <p style="font-family:'Cormorant Garamond',serif;font-style:italic;color:#6B4226;font-size:1rem;">* Reservas com menos de 2h podem sujeitar a disponibilidade. Recomendamos agendamento com 24h de antecedencia nos finais de semana.</p>
+    </div>
+    <div class="reveal" style="transition-delay:0.15s">
+      <div class="form-card">
+        <h3 class="form-title">Reservar Mesa</h3>
+        <p class="form-subtitle">Confirmaremos em ate 30 minutos</p>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Nome completo</label>
+            <input type="text" id="resNome" placeholder="Joao Silva">
+          </div>
+          <div class="form-group">
+            <label>Telefone / WhatsApp</label>
+            <input type="tel" id="resTelefone" placeholder="(11) 99999-9999">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Data</label>
+            <input type="date" id="resData">
+          </div>
+          <div class="form-group">
+            <label>Horario</label>
+            <select id="resHorario">
+              <option value="">Selecionar...</option>
+              <option>12:00</option><option>12:30</option>
+              <option>13:00</option><option>13:30</option>
+              <option>19:00</option><option>19:30</option>
+              <option>20:00</option><option>20:30</option>
+              <option>21:00</option><option>21:30</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Numero de pessoas</label>
+          <select id="resPessoas">
+            <option>1 pessoa</option><option>2 pessoas</option>
+            <option>3 pessoas</option><option>4 pessoas</option>
+            <option>5 pessoas</option><option>6 pessoas</option>
+            <option>Grupo (7+)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Observacoes especiais</label>
+          <textarea id="resObs" placeholder="Aniversario, restricoes alimentares, preferencias de mesa..."></textarea>
+        </div>
+        <button class="btn-primary form-submit" onclick="enviarReservaWhatsApp()">Confirmar Reserva</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-delivery" id="delivery">
+  <div class="delivery-bg"></div>
+  <div class="delivery-content">
+    <div class="section-label">Delivery</div>
+    <h2 class="delivery-title">Napoles na<br>sua <em>porta</em></h2>
+    <p class="delivery-desc">Embalagem termica especial que mantem a pizza quente e crocante ate a entrega. Pedido minimo R$ 45.</p>
+    <div class="delivery-apps">
+      <a class="app-btn" href="https://wa.me/5515997702317" target="_blank">
+        <span>&#x1F4AC;</span> WhatsApp
+      </a>
+      <button class="app-btn btn-primary" onclick="abrirPedidoDireto()">
+        <span>&#x1F355;</span> Pedido Direto
+      </button>
+    </div>
+    <div class="delivery-tempo">
+      <div class="tempo-item">
+        <div class="tempo-num">35'</div>
+        <div class="tempo-label">Tempo medio</div>
+      </div>
+      <div class="tempo-item">
+        <div class="tempo-num">5km</div>
+        <div class="tempo-label">Raio de entrega</div>
+      </div>
+      <div class="tempo-item">
+        <div class="tempo-num">R$0</div>
+        <div class="tempo-label">Frete acima de R$80</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-depoimentos">
+  <div class="depoimentos-header reveal">
+    <div class="section-label">Depoimentos</div>
+    <h2 class="section-title">O que nossos <em>clientes</em> dizem</h2>
+  </div>
+  <div class="depoimentos-grid">
+    <div class="depoimento-card reveal">
+      <div class="depoimento-quote">"</div>
+      <p class="depoimento-text">A melhor pizza que ja comi fora da Italia. A massa e leve, a borda e perfeita e os ingredientes tem um sabor que nao consigo encontrar em nenhuma outra pizzaria em Sao Paulo.</p>
+      <div class="depoimento-author">
+        <div class="author-avatar">MF</div>
+        <div>
+          <div class="author-name">Marina Ferreira</div>
+          <div class="author-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        </div>
+      </div>
+    </div>
+    <div class="depoimento-card reveal" style="transition-delay:0.1s">
+      <div class="depoimento-quote">"</div>
+      <p class="depoimento-text">Celebrei meu aniversario aqui e foi inesquecivel. O atendimento e impecavel, o ambiente e acolhedor e a pizza Diavola simplesmente nao tem igual.</p>
+      <div class="depoimento-author">
+        <div class="author-avatar">RC</div>
+        <div>
+          <div class="author-name">Rafael Costa</div>
+          <div class="author-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        </div>
+      </div>
+    </div>
+    <div class="depoimento-card reveal" style="transition-delay:0.2s">
+      <div class="depoimento-quote">"</div>
+      <p class="depoimento-text">Peco delivery toda semana. A pizza chega quentinha e crocante, exatamente como no restaurante. O sistema pelo WhatsApp e super facil e rapido.</p>
+      <div class="depoimento-author">
+        <div class="author-avatar">AS</div>
+        <div>
+          <div class="author-name">Ana Santos</div>
+          <div class="author-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-localizacao" id="localizacao">
+  <div class="localizacao-inner">
+    <div class="reveal">
+      <div class="section-label" style="color:var(--oro)">Onde estamos</div>
+      <h2 class="section-title" style="color:var(--crema)">Vila Madalena,<br><em style="color:var(--rosso-vivo)">Sao Paulo</em></h2>
+      <div class="horarios">
+        <div class="horario-row"><span class="horario-dia">Segunda</span><span class="horario-tempo fechado">Fechado</span></div>
+        <div class="horario-row"><span class="horario-dia">Ter &mdash; Qui</span><span class="horario-tempo">18h &mdash; 23h</span></div>
+        <div class="horario-row"><span class="horario-dia">Sex &mdash; Sab</span><span class="horario-tempo">12h &mdash; 00h</span></div>
+        <div class="horario-row"><span class="horario-dia">Domingo</span><span class="horario-tempo">12h &mdash; 22h</span></div>
+      </div>
+      <div class="localizacao-contato">
+        <div class="contato-item"><div class="contato-icon">&#128205;</div>Rua Harmonia, 1234 &mdash; Vila Madalena</div>
+        <div class="contato-item"><div class="contato-icon">&#128222;</div>(11) 3813-4567</div>
+        <div class="contato-item"><div class="contato-icon">&#128172;</div>(11) 99876-5432</div>
+        <div class="contato-item"><div class="contato-icon">&#9993;</div>contato@bellanapoli.com.br</div>
+      </div>
+    </div>
+    <div class="mapa-placeholder reveal" style="transition-delay:0.15s">
+      <div class="mapa-rua-h" style="top:45%"></div>
+      <div class="mapa-rua-h" style="top:70%"></div>
+      <div class="mapa-rua-v" style="left:35%"></div>
+      <div class="mapa-rua-v" style="left:65%"></div>
+      <div class="mapa-marker">
+        <div class="mapa-pin"></div>
+        <div class="mapa-label">Bella Napoli</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#" class="nav-logo">Bella <span>Napoli</span></a>
+      <p class="footer-tagline">Autentica pizzaria napolitana no coracao de Vila Madalena desde 1987.</p>
+      <div class="footer-social">
+        <a class="social-btn" href="#">ig</a>
+        <a class="social-btn" href="#">fb</a>
+        <a class="social-btn" href="#">yt</a>
+        <a class="social-btn" href="#">wa</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Restaurante</h4>
+      <ul class="footer-links">
+        <li><a href="#sobre">Nossa Historia</a></li>
+        <li><a href="#cardapio">Cardapio</a></li>
+        <li><a href="#reserva">Reservas</a></li>
+        <li><a href="#localizacao">Localizacao</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Delivery</h4>
+      <ul class="footer-links">
+        <li><a href="https://wa.me/5515997702317" target="_blank">WhatsApp</a></li>
+        <li><a href="#" onclick="abrirPedidoDireto()">Pedido Direto</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contato</h4>
+      <ul class="footer-links">
+        <li><a href="#">(11) 3813-4567</a></li>
+        <li><a href="#">WhatsApp</a></li>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">contato@bellanapoli.com.br</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">&copy; 2024 Bella Napoli &mdash; Todos os direitos reservados. Desenvolvido com <span>&hearts;</span> por PixelForge.</p>
+    <p class="footer-copy">CNPJ 12.345.678/0001-90</p>
+  </div>
+</footer>
+
+<!-- MODAL PEDIDO DIRETO -->
+<div class="modal-overlay" id="modalOverlay" onclick="fecharModalSeClicouFora(event)">
+  <div class="modal-box" id="modalBox">
+    <div class="modal-header">
+      <div>
+        <div class="modal-pizza-name" id="modalNome"></div>
+        <div class="modal-pizza-desc" id="modalDesc"></div>
+      </div>
+      <button class="modal-close" onclick="fecharModal()">&#x2715;</button>
+    </div>
+    <div class="modal-body">
+
+      <div class="modal-section-title">Tamanho da pizza</div>
+      <div class="modal-options" id="opTamanho">
+        <button class="modal-opt selected" onclick="selecionarOpt(this,'tamanho','inteira')" data-val="inteira">
+          <span class="modal-opt-label">Pizza Inteira</span>
+          <span class="modal-opt-sub">Serve 2 a 4 pessoas</span>
+        </button>
+        <button class="modal-opt" onclick="selecionarOpt(this,'tamanho','meia')" data-val="meia">
+          <span class="modal-opt-label">Meia a Meia</span>
+          <span class="modal-opt-sub">Escolha 2 sabores</span>
+        </button>
+      </div>
+
+      <div class="modal-meia-select" id="meiaSelect">
+        <div class="modal-section-title">Segundo sabor (segunda metade)</div>
+        <div class="meia-cards-grid" id="meiaCardsGrid"></div>
+        <input type="hidden" id="segundoSabor" value="">
+      </div>
+
+      <div class="modal-section-title">Escolha a borda</div>
+      <div class="modal-options" id="opBorda" style="grid-template-columns: repeat(3,1fr)">
+        <button class="modal-opt selected" onclick="selecionarOpt(this,'borda','tradicional')" data-val="tradicional">
+          <span class="modal-opt-label">Tradicional</span>
+          <span class="modal-opt-sub">Borda classica napolitana</span>
+        </button>
+        <button class="modal-opt" onclick="selecionarOpt(this,'borda','catupiry')" data-val="catupiry">
+          <span class="modal-opt-label">Catupiry</span>
+          <span class="modal-opt-sub">+ R$ 8,00 — cremoso</span>
+        </button>
+        <button class="modal-opt" onclick="selecionarOpt(this,'borda','cheddar')" data-val="cheddar">
+          <span class="modal-opt-label">Cheddar</span>
+          <span class="modal-opt-sub">+ R$ 8,00 — defumado</span>
+        </button>
+        <button class="modal-opt" onclick="selecionarOpt(this,'borda','parmesao')" data-val="parmesao">
+          <span class="modal-opt-label">Parmesao</span>
+          <span class="modal-opt-sub">+ R$ 6,00 — crocante com ervas</span>
+        </button>
+        <button class="modal-opt" onclick="selecionarOpt(this,'borda','semgluten')" data-val="semgluten">
+          <span class="modal-opt-label">Sem Gluten</span>
+          <span class="modal-opt-sub">+ R$ 12,00 — massa especial</span>
+        </button>
+      </div>
+
+      <!-- ENTREGA -->
+      <div class="modal-section-title" style="margin-top:0.5rem">Endereco de entrega</div>
+      <div class="modal-input-group">
+        <label>Rua e numero</label>
+        <input type="text" id="endRua" placeholder="Ex: Rua das Flores, 123">
+      </div>
+      <div class="modal-input-row">
+        <div class="modal-input-group">
+          <label>Bairro</label>
+          <input type="text" id="endBairro" placeholder="Ex: Vila Madalena">
+        </div>
+        <div class="modal-input-group">
+          <label>Complemento</label>
+          <input type="text" id="endComplemento" placeholder="Apto, bloco...">
+        </div>
+      </div>
+      <div class="modal-input-group">
+        <label>Referencia (opcional)</label>
+        <textarea id="endReferencia" placeholder="Ex: Proximo ao mercado, portao azul..."></textarea>
+      </div>
+
+      <!-- PAGAMENTO -->
+      <div class="modal-section-title">Forma de pagamento</div>
+      <div class="pgto-grid" id="pgtoGrid">
+        <button class="pgto-opt selected" onclick="selecionarPgto(this,'Dinheiro')">
+          <span class="pgto-icon">💵</span>
+          <span class="pgto-label">Dinheiro</span>
+        </button>
+        <button class="pgto-opt" onclick="selecionarPgto(this,'Cartao de Credito')">
+          <span class="pgto-icon">💳</span>
+          <span class="pgto-label">Credito</span>
+        </button>
+        <button class="pgto-opt" onclick="selecionarPgto(this,'Cartao de Debito')">
+          <span class="pgto-icon">💳</span>
+          <span class="pgto-label">Debito</span>
+        </button>
+        <button class="pgto-opt" onclick="selecionarPgto(this,'Pix')">
+          <span class="pgto-icon">⚡</span>
+          <span class="pgto-label">Pix</span>
+        </button>
+        <button class="pgto-opt" onclick="selecionarPgto(this,'Vale Refeicao')">
+          <span class="pgto-icon">🎫</span>
+          <span class="pgto-label">Vale Ref.</span>
+        </button>
+        <button class="pgto-opt" onclick="selecionarPgto(this,'Vale Alimentacao')">
+          <span class="pgto-icon">🛒</span>
+          <span class="pgto-label">Vale Alim.</span>
+        </button>
+      </div>
+      <div class="troco-field" id="trocoField">
+        <div class="modal-input-group">
+          <label>Troco para quanto?</label>
+          <input type="text" id="trocoValor" placeholder="Ex: R$ 100,00">
+        </div>
+      </div>
+
+      <div class="modal-price-row">
+        <span class="modal-total-label">Total estimado</span>
+        <span class="modal-total-price" id="modalTotal">R$ 0</span>
+      </div>
+
+      <button class="modal-btn-confirmar" id="btnConfirmar" onclick="enviarPedidoWhatsApp()">
+        Enviar Pedido pelo WhatsApp
+      </button>
+
+    </div>
+  </div>
+</div>
+
+<div class="notification" id="notification"></div>
+
+<script>
+var navbar = document.getElementById('navbar');
+window.addEventListener('scroll', function() {
+  navbar.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+var reveals = document.querySelectorAll('.reveal');
+var observer = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+reveals.forEach(function(el) { observer.observe(el); });
+
+var menu = {
+  classicas: [
+    { num:'01', name:'Margherita', desc:'Molho San Marzano, mozzarella di bufala, manjericao fresco, azeite EVO', price:'R$ 62', priceNum:62, tag:'classica', tagLabel:'Classica' },
+    { num:'02', name:'Marinara', desc:'Molho San Marzano, alho, oregano, azeite EVO - sem queijo, vegan', price:'R$ 52', priceNum:52, tag:'verde', tagLabel:'Vegan' },
+    { num:'03', name:'Quattro Formaggi', desc:'Mozzarella, gorgonzola, parmesao, provolone defumado', price:'R$ 74', priceNum:74, tag:'classica', tagLabel:'Classica' },
+    { num:'04', name:'Napoletana', desc:'Molho San Marzano, mozzarella, anchovas, azeitonas Gaeta, alcaparras', price:'R$ 68', priceNum:68, tag:'classica', tagLabel:'Classica' },
+    { num:'05', name:'Prosciutto', desc:'Mozzarella di bufala, presunto San Daniele, rucula, parmesao em lascas', price:'R$ 78', priceNum:78, tag:'classica', tagLabel:'Classica' },
+    { num:'06', name:'Capricciosa', desc:'Mozzarella, cogumelos funghi, alcachofra, azeitonas, prosciutto cotto', price:'R$ 72', priceNum:72, tag:'classica', tagLabel:'Classica' }
+  ],
+  especiais: [
+    { num:'07', name:'Diavola', desc:'Molho San Marzano, mozzarella, salame picante nduja, pimenta calabresa, mel de abelha', price:'R$ 76', priceNum:76, tag:'especial', tagLabel:'Especial' },
+    { num:'08', name:'Truffle Bianca', desc:'Creme de trufa, mozzarella fior di latte, cogumelo paris grelhado, cebolinha', price:'R$ 89', priceNum:89, tag:'especial', tagLabel:'Especial' },
+    { num:'09', name:'Burrata e Fichi', desc:'Mozzarella, burrata fresca, figos frescos, mel de acacia, nozes caramelizadas', price:'R$ 85', priceNum:85, tag:'especial', tagLabel:'Especial' },
+    { num:'10', name:'Bresaola & Limone', desc:'Mozzarella, bresaola, rucula, raspas de limao siciliano, parmesao 24 meses', price:'R$ 82', priceNum:82, tag:'especial', tagLabel:'Especial' },
+    { num:'11', name:'Nduja & Stracciatella', desc:'Molho de tomate, stracciatella cremosa, nduja picante, manjericao, azeite EVO', price:'R$ 87', priceNum:87, tag:'especial', tagLabel:'Especial' },
+    { num:'12', name:'Pistacchio', desc:'Creme de pistache siciliano, mozzarella, mortadela, pistaches torrados', price:'R$ 83', priceNum:83, tag:'especial', tagLabel:'Chef' }
+  ],
+  doces: [
+    { num:'13', name:'Nutella & Frutti', desc:'Nutella, morangos frescos, banana caramelizada, acucar de confeiteiro', price:'R$ 55', priceNum:55, tag:'verde', tagLabel:'Doce' },
+    { num:'14', name:'Ricotta e Miele', desc:'Ricotta fresca, mel milflores, nozes, canela, frutas vermelhas', price:'R$ 52', priceNum:52, tag:'verde', tagLabel:'Doce' },
+    { num:'15', name:'Cioccolato Bianco', desc:'Chocolate branco belga, amendoas laminadas, creme de baunilha Bourbon', price:'R$ 58', priceNum:58, tag:'verde', tagLabel:'Doce' }
+  ],
+  bebidas: [
+    { num:'16', name:'Peroni Nastro Azzurro', desc:'Cerveja italiana premium - 600ml', price:'R$ 26', priceNum:26, tag:'classica', tagLabel:'Importada' },
+    { num:'17', name:'Limoncello Spritz', desc:'Limoncello di Sorrento, prosecco, agua com gas, zest de limao', price:'R$ 38', priceNum:38, tag:'especial', tagLabel:'Exclusivo' },
+    { num:'18', name:'Vinho da Casa', desc:'Tinto ou branco - taca 180ml - Montepulciano', price:'R$ 32', priceNum:32, tag:'classica', tagLabel:'Importado' }
+  ]
+};
+
+var pedidoAtual = { nome:'', desc:'', preco:0, tamanho:'inteira', borda:'tradicional' };
+
+function renderMenu(category) {
+  var items = menu[category];
+  var html = '';
+  for (var i = 0; i < items.length; i++) {
+    var item = items[i];
+    var n = item.name.replace(/'/g, "\\'");
+    var d = item.desc.replace(/'/g, "\\'");
+    html += '<div class="pizza-card" onclick="abrirModal(\'' + n + '\',\'' + d + '\',' + item.priceNum + ')">';
+    html += '<div class="pizza-num">' + item.num + '</div>';
+    html += '<div class="pizza-name">' + item.name + '</div>';
+    html += '<div class="pizza-desc">' + item.desc + '</div>';
+    html += '<div class="pizza-footer"><div class="pizza-price">' + item.price + '</div>';
+    html += '<div class="pizza-tag ' + item.tag + '">' + item.tagLabel + '</div></div>';
+    html += '</div>';
+  }
+  document.getElementById('cardapio-content').innerHTML = html;
+}
+
+function changeTab(btn, category) {
+  var tabs = document.querySelectorAll('.tab-btn');
+  for (var i = 0; i < tabs.length; i++) tabs[i].classList.remove('active');
+  btn.classList.add('active');
+  renderMenu(category);
+}
+
+renderMenu('classicas');
+
+function renderMeiaCards(pizzaAtualNome) {
+  var todas = menu.classicas.concat(menu.especiais);
+  var html = '';
+  for (var i = 0; i < todas.length; i++) {
+    var p = todas[i];
+    var isAtual = p.name === pizzaAtualNome;
+    var n = p.name.replace(/'/g, "\\'");
+    var d = p.desc.replace(/'/g, "\\'");
+    html += '<div class="meia-card' + (isAtual ? ' disabled' : '') + '" onclick="selecionarMeia(this,\'' + n + '\',\'' + d + '\',' + p.priceNum + ')">';
+    html += '<div class="meia-card-num">' + p.num + '</div>';
+    html += '<div class="meia-card-name">' + p.name + '</div>';
+    html += '<div class="meia-card-desc">' + p.desc + '</div>';
+    html += '<div class="meia-card-price">' + p.price + '</div>';
+    html += '</div>';
+  }
+  document.getElementById('meiaCardsGrid').innerHTML = html;
+}
+
+function selecionarMeia(card, nome, desc, preco) {
+  var cards = document.querySelectorAll('.meia-card');
+  for (var i = 0; i < cards.length; i++) cards[i].classList.remove('selected');
+  card.classList.add('selected');
+  document.getElementById('segundoSabor').value = nome + ' - R$ ' + preco;
+  pedidoAtual.segundoSaborNome = nome;
+  pedidoAtual.segundoSaborPreco = preco;
+  atualizarTotal();
+}
+
+function selecionarPgto(btn, val) {
+  var opts = document.querySelectorAll('#pgtoGrid .pgto-opt');
+  for (var i = 0; i < opts.length; i++) opts[i].classList.remove('selected');
+  btn.classList.add('selected');
+  pedidoAtual.pagamento = val;
+  document.getElementById('trocoField').classList.toggle('visible', val === 'Dinheiro');
+}
+
+function abrirModal(nome, desc, preco) {
+  pedidoAtual = { nome: nome, desc: desc, preco: preco, tamanho: 'inteira', borda: 'tradicional', segundoSaborNome: '', segundoSaborPreco: 0, pagamento: 'Dinheiro' };
+  document.getElementById('modalNome').textContent = nome;
+  document.getElementById('modalDesc').textContent = desc;
+  // reset tamanho
+  var opts = document.querySelectorAll('#opTamanho .modal-opt');
+  for (var i = 0; i < opts.length; i++) opts[i].classList.remove('selected');
+  opts[0].classList.add('selected');
+  // reset borda
+  var bordas = document.querySelectorAll('#opBorda .modal-opt');
+  for (var i = 0; i < bordas.length; i++) bordas[i].classList.remove('selected');
+  bordas[0].classList.add('selected');
+  // reset meia
+  document.getElementById('meiaSelect').classList.remove('visible');
+  document.getElementById('segundoSabor').value = '';
+  document.getElementById('modalBox').classList.remove('meia-mode');
+  // reset pagamento
+  var pgtos = document.querySelectorAll('#pgtoGrid .pgto-opt');
+  for (var i = 0; i < pgtos.length; i++) pgtos[i].classList.remove('selected');
+  pgtos[0].classList.add('selected');
+  document.getElementById('trocoField').classList.add('visible');
+  // reset endereco
+  document.getElementById('endRua').value = '';
+  document.getElementById('endBairro').value = '';
+  document.getElementById('endComplemento').value = '';
+  document.getElementById('endReferencia').value = '';
+  document.getElementById('trocoValor').value = '';
+  renderMeiaCards(nome);
+  atualizarTotal();
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function fecharModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.getElementById('modalBox').classList.remove('meia-mode');
+  document.body.style.overflow = '';
+}
+
+function fecharModalSeClicouFora(e) {
+  if (e.target === document.getElementById('modalOverlay')) fecharModal();
+}
+
+function selecionarOpt(btn, grupo, val) {
+  var container = btn.parentElement;
+  var opts = container.querySelectorAll('.modal-opt');
+  for (var i = 0; i < opts.length; i++) opts[i].classList.remove('selected');
+  btn.classList.add('selected');
+  pedidoAtual[grupo] = val;
+  if (grupo === 'tamanho') {
+    if (val === 'meia') {
+      document.getElementById('meiaSelect').classList.add('visible');
+      document.getElementById('modalBox').classList.add('meia-mode');
+    } else {
+      document.getElementById('meiaSelect').classList.remove('visible');
+      document.getElementById('modalBox').classList.remove('meia-mode');
+      document.getElementById('segundoSabor').value = '';
+      pedidoAtual.segundoSaborNome = '';
+      pedidoAtual.segundoSaborPreco = 0;
+      var cards = document.querySelectorAll('.meia-card');
+      for (var i = 0; i < cards.length; i++) cards[i].classList.remove('selected');
+    }
+  }
+  atualizarTotal();
+}
+
+function atualizarTotal() {
+  var extra = 0;
+  if (pedidoAtual.borda === 'catupiry') extra = 8;
+  else if (pedidoAtual.borda === 'cheddar') extra = 8;
+  else if (pedidoAtual.borda === 'parmesao') extra = 6;
+  else if (pedidoAtual.borda === 'semgluten') extra = 12;
+  var base = pedidoAtual.preco;
+  if (pedidoAtual.tamanho === 'meia' && pedidoAtual.segundoSaborPreco > 0) {
+    base = Math.max(pedidoAtual.preco, pedidoAtual.segundoSaborPreco);
+  }
+  var total = base + extra;
+  document.getElementById('modalTotal').textContent = 'R$ ' + total.toFixed(2).replace('.', ',');
+}
+
+document.getElementById('segundoSabor').addEventListener('change', atualizarTotal);
+
+function abrirPedidoDireto() {
+  document.getElementById('cardapio').scrollIntoView({ behavior: 'smooth' });
+  setTimeout(function() { showNotification('Escolha uma pizza no cardapio para montar seu pedido!'); }, 700);
+}
+
+function enviarPedidoWhatsApp() {
+  var tamanhoLabel = pedidoAtual.tamanho === 'inteira' ? 'Inteira' : 'Meia a Meia';
+  var bordaLabels = { tradicional:'Tradicional', catupiry:'Catupiry (+R$8)', cheddar:'Cheddar (+R$8)', parmesao:'Parmesao (+R$6)', semgluten:'Sem Gluten (+R$12)' };
+  var bordaLabel = bordaLabels[pedidoAtual.borda];
+  var segundoSaborLine = '';
+  if (pedidoAtual.tamanho === 'meia') {
+    segundoSaborLine = '\n   2a metade: ' + (pedidoAtual.segundoSaborNome || 'nao selecionado');
+  }
+  var rua = document.getElementById('endRua').value.trim() || 'nao informado';
+  var bairro = document.getElementById('endBairro').value.trim();
+  var complemento = document.getElementById('endComplemento').value.trim();
+  var referencia = document.getElementById('endReferencia').value.trim();
+  var enderecoLine = rua;
+  if (bairro) enderecoLine += ', ' + bairro;
+  if (complemento) enderecoLine += ' - ' + complemento;
+  if (referencia) enderecoLine += '\n   Referencia: ' + referencia;
+  var pgto = pedidoAtual.pagamento || 'Dinheiro';
+  var trocoLine = '';
+  if (pgto === 'Dinheiro') {
+    var troco = document.getElementById('trocoValor').value.trim();
+    if (troco) trocoLine = '\n   Troco para: ' + troco;
+  }
+  var total = document.getElementById('modalTotal').textContent;
+  var msg = 'Ola! Gostaria de fazer um pedido na Bella Napoli:\n'
+    + '--------------------------------\n'
+    + '🍕 PEDIDO\n'
+    + 'Pizza: ' + pedidoAtual.nome + '\n'
+    + 'Tamanho: ' + tamanhoLabel + segundoSaborLine + '\n'
+    + 'Borda: ' + bordaLabel + '\n'
+    + '--------------------------------\n'
+    + '📍 ENTREGA\n'
+    + enderecoLine + '\n'
+    + '--------------------------------\n'
+    + '💳 PAGAMENTO\n'
+    + pgto + trocoLine + '\n'
+    + '--------------------------------\n'
+    + '💰 TOTAL: ' + total;
+  window.open('https://api.whatsapp.com/send?phone=5515997702317&text=' + encodeMsg(msg), '_blank');
+  fecharModal();
+}
+
+function enviarReservaWhatsApp() {
+  var nome     = document.getElementById('resNome').value.trim();
+  var telefone = document.getElementById('resTelefone').value.trim();
+  var data     = document.getElementById('resData').value;
+  var horario  = document.getElementById('resHorario').value;
+  var pessoas  = document.getElementById('resPessoas').value;
+  var obs      = document.getElementById('resObs').value.trim();
+
+  if (!nome || !telefone || !data || !horario) {
+    showNotification('Preencha nome, telefone, data e horario para continuar.');
+    return;
+  }
+
+  // formata data DD/MM/AAAA
+  var partes = data.split('-');
+  var dataFmt = partes[2] + '/' + partes[1] + '/' + partes[0];
+
+  var msg = 'Ola! Gostaria de fazer uma reserva na Bella Napoli:\n'
+    + '--------------------------------\n'
+    + '📅 DATA E HORARIO\n'
+    + 'Data: ' + dataFmt + '\n'
+    + 'Horario: ' + horario + '\n'
+    + '👥 ' + pessoas + '\n'
+    + '--------------------------------\n'
+    + '📞 CONTATO\n'
+    + 'Nome: ' + nome + '\n'
+    + 'Telefone: ' + telefone + '\n'
+    + (obs ? '--------------------------------\n' + '📝 OBSERVACOES\n' + obs + '\n' : '')
+    + '--------------------------------';
+
+  window.open('https://api.whatsapp.com/send?phone=5515997702317&text=' + encodeMsg(msg), '_blank');
+  showNotification('Reserva enviada! Aguarde nossa confirmacao pelo WhatsApp.');
+
+  // limpa o form
+  document.getElementById('resNome').value = '';
+  document.getElementById('resTelefone').value = '';
+  document.getElementById('resData').value = '';
+  document.getElementById('resHorario').value = '';
+  document.getElementById('resPessoas').value = '1 pessoa';
+  document.getElementById('resObs').value = '';
+}
+
+function encodeMsg(str) {
+  return encodeURIComponent(str);
+}
+
+function showNotification(msg) {
+  var n = document.getElementById('notification');
+  n.textContent = msg;
+  n.classList.add('show');
+  setTimeout(function() { n.classList.remove('show'); }, 3500);
+}
+
+document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+  a.addEventListener('click', function(e) {
+    var target = document.querySelector(a.getAttribute('href'));
+    if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+  });
+});
+</script>
+</body>
+</html>
