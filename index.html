@@ -346,8 +346,10 @@ footer { background: #0F0806; padding: 5rem 4rem 2rem; border-top: 1px solid rgb
   .meia-cards-grid { grid-template-columns: repeat(2, 1fr); }
   .pgto-grid { grid-template-columns: repeat(3, 1fr); }
   .modal-input-row { grid-template-columns: 1fr; }
-  .modal-box { max-width: 100% !important; margin: 0; max-height: 100vh; border-radius: 0; }
-  .modal-overlay { align-items: flex-end; padding: 0; }
+  .modal-box { max-width: 100% !important; margin: 0; max-height: 92vh; border-radius: 0; overflow-y: scroll; -webkit-overflow-scrolling: touch; }
+  .modal-overlay { align-items: flex-end; padding: 0; overflow: hidden; }
+  .modal-body { padding: 0 1.2rem 3rem; }
+  .modal-header { padding: 1.5rem 1.2rem 1rem; }
   .cookie-banner { padding: 1rem 1.2rem; }
   .cookie-actions { width: 100%; justify-content: flex-end; }
 }
@@ -357,8 +359,8 @@ footer { background: #0F0806; padding: 5rem 4rem 2rem; border-top: 1px solid rgb
   .hero-stats { gap: 1.2rem; flex-wrap: wrap; }
   .stat-num { font-size: 1.6rem; }
   .section-title { font-size: clamp(1.8rem, 8vw, 3rem); }
-  .cardapio-tabs { gap: 0.3rem; flex-wrap: wrap; }
-  .tab-btn { font-size: 0.65rem; padding: 0.6rem 0.8rem; }
+  .cardapio-tabs { gap: 0.4rem; flex-wrap: wrap; justify-content: center; padding: 0 0.5rem; }
+  .tab-btn { font-size: 0.63rem; padding: 0.65rem 0.9rem; flex: 1; min-width: 70px; text-align: center; white-space: nowrap; }
   .delivery-apps { flex-direction: column; align-items: stretch; }
   .app-btn { width: 100%; justify-content: center; }
   .footer-grid { grid-template-columns: 1fr; }
@@ -677,12 +679,12 @@ footer { background: #0F0806; padding: 5rem 4rem 2rem; border-top: 1px solid rgb
         <li><a href="#">(11) 3813-4567</a></li>
         <li><a href="#">WhatsApp</a></li>
         <li><a href="#">Instagram</a></li>
-        <li><a href="mailto:contato@bellanapoli.com.br">contato@bellanapoli.com.br</a></li>
+        <li><a href="/cdn-cgi/l/email-protection#2b4844455f4a5f446b494e47474a454a5b44474205484446054959"><span class="__cf_email__" data-cfemail="a2c1cdccd6c3d6cde2c0c7cecec3ccc3d2cdcecb8cc1cdcf8cc0d0">[email&#160;protected]</span></a></li>
       </ul>
     </div>
   </div>
   <div class="footer-bottom">
-    <p class="footer-copy">&copy; 2025 Bella Napoli &mdash; Todos os direitos reservados. Desenvolvido com <span>&hearts;</span> por PixelForge.</p>
+    <p class="footer-copy">&copy; 2025 Bella Napoli &mdash; Todos os direitos reservados. Desenvolvido com <span>&hearts;</span> por <a href="https://pixelforgejln.vercel.app/" target="_blank" style="color:var(--oro);text-decoration:none;transition:opacity 0.2s" onmouseover="this.style.opacity='.7'" onmouseout="this.style.opacity='1'">PixelForge — Sites que vendem</a>.</p>
     <p class="footer-copy">CNPJ 12.345.678/0001-90</p>
     <p class="footer-copy" style="margin-top:0.5rem">
       <a href="#" onclick="abrirPolitica()" style="color:rgba(245,236,215,0.35);text-decoration:underline;font-size:0.72rem">Política de Privacidade</a>
@@ -874,13 +876,13 @@ footer { background: #0F0806; padding: 5rem 4rem 2rem; border-top: 1px solid rgb
         <li>Revogar o consentimento a qualquer momento</li>
         <li>Solicitar a portabilidade dos dados</li>
       </ul>
-      <p>Para exercer seus direitos, entre em contato pelo e-mail <strong>privacidade@bellanapoli.com.br</strong> ou pelo WhatsApp <strong>(11) 99876-5432</strong>.</p>
+      <p>Para exercer seus direitos, entre em contato pelo e-mail <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2c5c5e455a4d4f45484d48496c4e4940404d424d5c434045024f4341024e5e">[email&#160;protected]</a></strong> ou pelo WhatsApp <strong>(11) 99876-5432</strong>.</p>
 
       <h3>5. Retenção de dados</h3>
       <p>Os dados fornecidos para pedidos e reservas são mantidos apenas pelo tempo necessário para a execução do serviço solicitado, salvo obrigação legal de retenção.</p>
 
       <h3>6. Contato do Encarregado (DPO)</h3>
-      <p>Responsável pela proteção de dados: <strong>contato@bellanapoli.com.br</strong></p>
+      <p>Responsável pela proteção de dados: <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2a4945445e4b5e456a484f46464b444b5a45464304494547044858">[email&#160;protected]</a></strong></p>
 
       <h3>7. Alterações nesta política</h3>
       <p>Esta política pode ser atualizada a qualquer momento. A versão mais recente estará sempre disponível neste site. Última atualização: <strong>março de 2025</strong>.</p>
@@ -890,7 +892,7 @@ footer { background: #0F0806; padding: 5rem 4rem 2rem; border-top: 1px solid rgb
 
 <div class="notification" id="notification"></div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // COOKIES LGPD
 (function() {
   try {
@@ -1066,14 +1068,25 @@ function abrirModal(nome, desc, preco) {
   document.getElementById('trocoValor').value = '';
   renderMeiaCards(nome);
   atualizarTotal();
+  document.getElementById('modalBox').scrollTop = 0;
   document.getElementById('modalOverlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
+  // mobile-safe scroll lock
+  var scrollY = window.scrollY;
+  document.body.style.top = '-' + scrollY + 'px';
+  document.body.style.position = 'fixed';
+  document.body.style.width = '100%';
+  document.body.dataset.scrollY = scrollY;
 }
 
 function fecharModal() {
   document.getElementById('modalOverlay').classList.remove('open');
   document.getElementById('modalBox').classList.remove('meia-mode');
-  document.body.style.overflow = '';
+  // restore scroll position
+  var scrollY = parseInt(document.body.dataset.scrollY || '0');
+  document.body.style.position = '';
+  document.body.style.top = '';
+  document.body.style.width = '';
+  window.scrollTo(0, scrollY);
 }
 
 function fecharModalSeClicouFora(e) {
@@ -1215,8 +1228,7 @@ function showNotification(msg) {
   var n = document.getElementById('notification');
   n.textContent = msg;
   n.classList.add('show');
-  setTimeout(function() {  n.classList.remove('show');
-  }, 3500);
+  setTimeout(function() { n.classList.remove('show'); }, 3500);
 }
 
 document.querySelectorAll('a[href^="#"]').forEach(function(a) {
